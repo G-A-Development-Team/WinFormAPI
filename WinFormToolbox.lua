@@ -3,7 +3,7 @@ Toolbox = {
 		local Props = {
 			Name = "Label",
 			Text = "A Label",
-			Location = point(25, 50),
+			Location = point(0, 0),
 			Size = size(75, 23),
 			
 			Font = {
@@ -14,7 +14,7 @@ Toolbox = {
 			ForeColor = SystemColors.Black,
 		}
 		local RegEvens = {
-			MouseHover = nil,
+
 		}
 		local Evens = {
 			Draw = function(X, Y, W, H, props)
@@ -29,12 +29,7 @@ Toolbox = {
 				draw.TextShadow(X + 8, Y + 15, props.Text)
 			end,
 			Register = function(event, callback)
-				if event == "MouseHover" then
-					RegEvens.MouseHover = callback
-				end
-			end,
-			MouseHover = function(mouseX, mouseY, X, Y, W, H, props)
-				props.BackColor = SystemColors.Black
+
 			end,
 			Click = function(mouseX, mouseY, X, Y, W, H, props)
 			end,
@@ -114,7 +109,7 @@ Toolbox = {
 			Text = "A Button",
 			Size = size(75, 23),
 			Location = point(0, 0),
-			Visible = false,
+			Visible = true,
 			
 			Font = {
 				Name = "Microsoft Sans Serif",
@@ -189,6 +184,78 @@ Toolbox = {
 				if props.Visible then
 					draw.Color(unpack(SystemColors.ButtonClick))
 					draw.FilledRect(X, Y, X + props.Size.Width, Y + props.Size.Height)
+				end
+			end,
+		}
+		return {
+			Interface = "Control",
+			Properties = Props,
+			Events = Evens,
+			RegisteredEvents = RegEvens,
+			OverridedEvents = OverEvens,
+			
+			Update = function(props)
+				props.Font.LoadedFont = draw.CreateFont(props.Font.Name, props.Font.Size, props.Font.Size)
+				
+				return props
+			end,
+		}
+	end,
+	ProgressBar = function()
+		local Props = {
+			Name = "ProgressBar",
+			Size = size(100, 23),
+			Location = point(0, 0),
+			Visible = true,
+			Value = 0,
+			Minimum = 0,
+			Maximum = 100,
+			
+			
+			Font = {
+				Name = "Microsoft Sans Serif",
+				Size = 15,
+				LoadedFont = nil,
+			},
+			ForeColor = SystemColors.Black,
+			ValueColor = SystemColors.Green,
+			BackColor = SystemColors.Button,
+			BorderColor = SystemColors.DarkGrey,
+		}
+		local RegEvens = {
+
+		}
+		local OverEvens = {
+			Draw = nil,
+		}
+		local Evens = {
+			Draw = function(X, Y, W, H, props)
+				X = X + props.Location.X
+				Y = Y + props.Location.Y
+				
+				--placeholder
+				draw.Color(unpack(props.BackColor))
+				draw.FilledRect(X, Y, X + props.Size.Width, Y + props.Size.Height)
+				
+				--value
+				draw.Color(unpack(props.ValueColor))
+				--draw.FilledRect(X, Y, X + props.Value, Y + props.Size.Height)
+				
+				if props.Value >= props.Maximum then return end
+				draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Value), Y + props.Size.Height)
+				--Border
+				--draw.Color(unpack(props.BorderColor))
+				--draw.OutlinedRect(X, Y, X + props.Size.Width, Y + props.Size.Height)
+				
+				
+				
+			end,
+			Register = function(event, callback)
+			
+			end,
+			Override = function(event, callback)
+				if event == "Draw" then
+					OverEvens.Draw = callback
 				end
 			end,
 		}
