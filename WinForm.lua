@@ -19,6 +19,10 @@ end)
 WinWindow = {
 	Draw = {
 		Background = function(Form, X, Y, W, H)
+			if Form.BorderShadow then
+				draw.Color(unpack(Form.BorderShadowColor));
+				draw.ShadowRect(X, Y, X + W, Y + H, Form.BorderShadowRadius)
+			end
 			if Form.WinStyle == 11 then
 				draw.Color(unpack(Form.BackColor))
 				draw.RoundedRectFill(X, Y, X + W, Y + H, 6, 6, 6, 6, 6)
@@ -27,6 +31,7 @@ WinWindow = {
 				draw.Color(unpack(Form.BackColor))
 				draw.FilledRect(X, Y, X + W, Y + H)
 			end
+
 		end,
 		TitleBar = function(Form, X, Y, W, H)
 			if Form.BorderStyle == "Sizable" then
@@ -60,7 +65,9 @@ WinWindow = {
 Application = {
 	Run = function(Form)
 		if Form.Interface == "Form" then
-			Form = Form.Update(Form)
+			if Form.Update ~= nil then
+				Form = Form.Update(Form)
+			end
 			local Controls = Form.Initialize()
 			
 			Controls["Add"] = function(control)
@@ -117,7 +124,7 @@ Application = {
 					end
 					Form.Controls[Form.Controls.Find("pb_close")].Properties.Visible = true
 					Form.Controls[Form.Controls.Find("CloseBtn")].Properties.Visible = true
-					Form.Controls[Form.Controls.Find("pb_close")].Properties.Location = point(X + 17,Y + 9)
+					Form.Controls[Form.Controls.Find("pb_close")].Properties.Location = point(props.Location.X + 17,props.Location.Y + 9)
 				else
 					Form.Controls[Form.Controls.Find("pb_close")].Properties.Visible = false
 					Form.Controls[Form.Controls.Find("CloseBtn")].Properties.Visible = false
@@ -160,7 +167,7 @@ Application = {
 					
 					Form.Controls[Form.Controls.Find("MaxBtn")].Properties.Visible = true
 					Form.Controls[Form.Controls.Find("pb_max")].Properties.Visible = true
-					Form.Controls[Form.Controls.Find("pb_max")].Properties.Location = point(X + 17,Y + 9)
+					Form.Controls[Form.Controls.Find("pb_max")].Properties.Location = point( props.Location.X + 17,props.Location.Y+9)
 				else
 					Form.Controls[Form.Controls.Find("pb_max")].Properties.Visible = false
 					Form.Controls[Form.Controls.Find("MaxBtn")].Properties.Visible = false
@@ -203,7 +210,6 @@ Application = {
 			end
 			
 			if Form.BorderStyle == "None" then
-				print("ok")
 				Resizable = false
 			end
 			
@@ -265,7 +271,9 @@ Application = {
 								if control.OverridedEvents.MouseHover ~= nil then
 									control.OverridedEvents.MouseHover(mouseX, mouseY, X, Y, W, H, control.Properties)
 								else
-									control.Events.MouseHover(mouseX, mouseY, X, Y, W, H, control.Properties)
+									if control.Events.MouseHover ~= nil then
+										control.Events.MouseHover(mouseX, mouseY, X, Y, W, H, control.Properties)
+									end
 								end
 								
 								if control.RegisteredEvents.MouseHover ~= nil then
@@ -273,7 +281,9 @@ Application = {
 								end
 								
 								if input.IsButtonDown(1) then
-									control.Events.Click(mouseX, mouseY, X, Y, W, H, control.Properties)
+									if control.Events.Click ~= nil then
+										control.Events.Click(mouseX, mouseY, X, Y, W, H, control.Properties)
+									end
 								end
 								
 								if input.IsButtonReleased(1) then
