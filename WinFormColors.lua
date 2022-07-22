@@ -9,4 +9,6 @@ SystemColors = {
 	TitleBarControlCloseHighlight = color(232, 17, 35, 255),
 	ButtonHighlightBorder = color(0, 120, 215, 150),
 	White = color(255, 255, 255, 255),
+	Green = color(6, 176, 37, 255),
+	Transparent = color(1, 1, 1, 1),
 }
