@@ -29,14 +29,14 @@ function dump(o)
     end
 end
 
-ffi.cdef([[
-    int ShowCursor(bool bShow);
-]])
-
-function ShowCursor(bool)
-	ffi.C.ShowCursor(bool)
-	print(bool)
-end
+--ffi.cdef([[
+--    int ShowCursor(bool bShow);
+--]])
+--
+--function ShowCursor(bool)
+--	ffi.C.ShowCursor(bool)
+--	print(bool)
+--end
 
 function MouseInLocation(X, Y, W, H)
 	local mouseX, mouseY = input.GetMousePos()
