@@ -1,5 +1,5 @@
 # WinFormAPI
-An LUA API based on C#.NET Winforms
+An LUA API based on C#.NET Winforms. Created by CarterPoe(GameChamp) Please credit if used
 
 Example
 ![image](https://user-images.githubusercontent.com/39221871/180582509-2b3d0726-c156-424e-81e7-b7f8ac1240d9.png)
