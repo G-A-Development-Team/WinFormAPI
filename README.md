@@ -3,7 +3,7 @@ An LUA API based on C#.NET Winforms
 
 Example
 ![image](https://user-images.githubusercontent.com/39221871/180582509-2b3d0726-c156-424e-81e7-b7f8ac1240d9.png)
-[code]
+```
 RunScript("Luas/Test/WinFormLib.lua")
 RunScript("Luas/Test/WinFormColors.lua")
 RunScript("Luas/Test/WinFormToolbox.lua")
@@ -98,4 +98,4 @@ local ebtn_button = gui.Button(ebtn_gui, "Clicky Clicky! #1", function()
 		print("added yo")
 	end)
 end)
-[/code]
+```
