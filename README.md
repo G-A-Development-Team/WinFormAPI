@@ -3,7 +3,7 @@ An LUA API based on C#.NET Winforms
 
 Example
 ![image](https://user-images.githubusercontent.com/39221871/180582509-2b3d0726-c156-424e-81e7-b7f8ac1240d9.png)
-```
+```lua
 RunScript("Luas/Test/WinFormLib.lua")
 RunScript("Luas/Test/WinFormColors.lua")
 RunScript("Luas/Test/WinFormToolbox.lua")
