@@ -212,6 +212,7 @@ Toolbox = {
 			Maximum = 100,
 			RightToLeft = false,
 			Rounded = false,
+			Roundness = 100,
 			
 			
 			Font = {
@@ -238,21 +239,21 @@ Toolbox = {
 				if props.Rounded then
 					--placeholder
 					draw.Color(unpack(props.BackColor))
-					draw.RoundedRectFill(X, Y, X + props.Size.Width, Y + props.Size.Height, 6)
+					draw.RoundedRectFill(X, Y, X + props.Size.Width, Y + props.Size.Height, props.Roundness)
 					
 					--value
 					draw.Color(unpack(props.ValueColor))
 					--draw.FilledRect(X, Y, X + props.Value, Y + props.Size.Height)
 					
 					if props.Value >= props.Maximum then 
-						draw.RoundedRectFill(X, Y, X + ((props.Size.Width/props.Maximum)*props.Maximum), Y + props.Size.Height, 6)
+						draw.RoundedRectFill(X, Y, X + ((props.Size.Width/props.Maximum)*props.Maximum), Y + props.Size.Height, props.Roundness)
 						return 
 					end
 					if props.Value <= props.Minimum then
-						draw.RoundedRectFill(X, Y, X + ((props.Size.Width/props.Maximum)*props.Minimum), Y + props.Size.Height, 6)
+						draw.RoundedRectFill(X, Y, X + ((props.Size.Width/props.Maximum)*props.Minimum), Y + props.Size.Height, props.Roundness)
 						return
 					end
-					draw.RoundedRectFill(X, Y, X + ((props.Size.Width/props.Maximum)*props.Value), Y + props.Size.Height, 6)
+					draw.RoundedRectFill(X, Y, X + ((props.Size.Width/props.Maximum)*props.Value), Y + props.Size.Height,props.Roundness)
 
 					
 				else
