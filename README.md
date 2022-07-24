@@ -4,10 +4,14 @@ An LUA API based on C#.NET Winforms. Created by CarterPoe(GameChamp) Please cred
 Example
 ![image](https://user-images.githubusercontent.com/39221871/180582509-2b3d0726-c156-424e-81e7-b7f8ac1240d9.png)
 ```lua
-RunScript("Luas/Test/WinFormLib.lua")
-RunScript("Luas/Test/WinFormColors.lua")
-RunScript("Luas/Test/WinFormToolbox.lua")
-RunScript("Luas/Test/WinForm.lua")
+function using(pkgn) file.Write( "\\using/json.lua", http.Get( "https://raw.githubusercontent.com/G-A-Development-Team/libs/main/json.lua" ) ) LoadScript("\\using/json.lua") local pkg = json.decode(http.Get("https://raw.githubusercontent.com/G-A-Development-Team/Using/main/using.json"))["pkgs"][ pkgn ] if pkg ~= nil then file.Write( "\\using/" .. pkgn .. ".lua", http.Get( pkg ) ) LoadScript("\\using/" .. pkgn .. ".lua") else print("[using] package doesn't exist. {" .. pkgn .. "}") end end
+
+
+using "Move-Resize"
+using "WinFormLib"
+using "WinFormColors"
+using "WinFormToolbox"
+using "WinForm"
 
 local Form1 = {
 	Name = "Form1",
@@ -17,10 +21,8 @@ local Form1 = {
 	MinimumSize = size(400, 350),
 	MaximumSize = size(1500, 800),
 	DragBounds = 30,
-	
 	BorderStyle = "Sizable", --None
-	WinStyle = 11,
-	ClickThru = false,
+	WinStyle = 11, -- 10
 	Visible = true,
 	
 	BackColor = SystemColors.Control,
@@ -30,10 +32,6 @@ local Form1 = {
 	Icon = "https://raw.githubusercontent.com/G-A-Development-Team/WinFormAPI/main/Icon.png",
 	LoadedIcon = nil,
 	
-	CursorIcon = "https://raw.githubusercontent.com/G-A-Development-Team/WinFormAPI/main/apnkp-iufgd-001.png",
-	LoadedCursorIcon = nil,
-	CursorEnabled = false,
-	
 	Font = {
 		Name = "Microsoft Sans Serif",
 		Size = 15,
@@ -41,21 +39,13 @@ local Form1 = {
 	},
 
 	Controls = {},
-	
 	Update = function(props)
 		--Load Font
 		props.Font.LoadedFont = draw.CreateFont(props.Font.Name, props.Font.Size)
-		
 		--Load Icon
 		local iconRGBA, iconWidth, iconHeight = common.DecodePNG(http.Get(props.Icon))
 		local iconTexture = draw.CreateTexture(iconRGBA, iconWidth, iconHeight)
 		props.LoadedIcon = iconTexture
-		
-		--Load Cursor Icon
-		local cursorIconRGBA, cursorIconWidth, cursorIconHeight = common.DecodePNG(http.Get(props.CursorIcon))
-		local cursorIconTexture = draw.CreateTexture(cursorIconRGBA, cursorIconWidth, cursorIconHeight)
-		props.LoadedCursorIcon = cursorIconTexture
-		
 		return props
 	end,
 	
