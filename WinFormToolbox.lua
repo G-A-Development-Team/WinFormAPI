@@ -210,6 +210,7 @@ Toolbox = {
 			Value = 0,
 			Minimum = 0,
 			Maximum = 100,
+			RightToLeft = false,
 			
 			
 			Font = {
@@ -241,7 +242,14 @@ Toolbox = {
 				draw.Color(unpack(props.ValueColor))
 				--draw.FilledRect(X, Y, X + props.Value, Y + props.Size.Height)
 				
-				if props.Value >= props.Maximum then return end
+				if props.Value >= props.Maximum then 
+					draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Maximum), Y + props.Size.Height)
+					return 
+				end
+				if props.Value <= props.Minimum then
+					draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Minimum), Y + props.Size.Height)
+					return
+				end
 				draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Value), Y + props.Size.Height)
 				--Border
 				--draw.Color(unpack(props.BorderColor))

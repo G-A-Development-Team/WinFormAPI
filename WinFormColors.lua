@@ -11,4 +11,6 @@ SystemColors = {
 	White = color(255, 255, 255, 255),
 	Green = color(6, 176, 37, 255),
 	Transparent = color(1, 1, 1, 1),
+	Grey = color(141, 141, 141, 255),
+	Red = color(240, 20, 0, 255),
 }
