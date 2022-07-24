@@ -4,10 +4,15 @@ An LUA API based on C#.NET Winforms. Created by CarterPoe(GameChamp) Please cred
 Example
 ![image](https://user-images.githubusercontent.com/39221871/180582509-2b3d0726-c156-424e-81e7-b7f8ac1240d9.png)
 ```lua
-RunScript("Luas/Test/WinFormLib.lua")
-RunScript("Luas/Test/WinFormColors.lua")
-RunScript("Luas/Test/WinFormToolbox.lua")
-RunScript("Luas/Test/WinForm.lua")
+function using(pkgn) file.Write( "\\using/json.lua", http.Get( "https://raw.githubusercontent.com/G-A-Development-Team/libs/main/json.lua" ) ) LoadScript("\\using/json.lua") local pkg = json.decode(http.Get("https://raw.githubusercontent.com/G-A-Development-Team/Using/main/using.json"))["pkgs"][ pkgn ] if pkg ~= nil then file.Write( "\\using/" .. pkgn .. ".lua", http.Get( pkg ) ) LoadScript("\\using/" .. pkgn .. ".lua") else print("[using] package doesn't exist. {" .. pkgn .. "}") end end
+
+
+using "Move-Resize"
+using "WinFormLib"
+using "WinFormColors"
+using "WinFormToolbox"
+using "WinForm"
+using "BombAPI"
 
 local Form1 = {
 	Name = "Form1",
