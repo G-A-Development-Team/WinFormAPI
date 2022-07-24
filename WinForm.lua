@@ -214,7 +214,7 @@ Application = {
 			if Form.BorderStyle == "None" then
 				Resizable = false
 			end
-			
+			Form.Dragging = false
 			local tbl = {
 				Name = Form.Name,
 				Form = Form,
