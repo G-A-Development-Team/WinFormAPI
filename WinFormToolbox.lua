@@ -211,6 +211,7 @@ Toolbox = {
 			Minimum = 0,
 			Maximum = 100,
 			RightToLeft = false,
+			Rounded = false,
 			
 			
 			Font = {
@@ -234,26 +235,48 @@ Toolbox = {
 				X = X + props.Location.X
 				Y = Y + props.Location.Y
 				
-				--placeholder
-				draw.Color(unpack(props.BackColor))
-				draw.FilledRect(X, Y, X + props.Size.Width, Y + props.Size.Height)
-				
-				--value
-				draw.Color(unpack(props.ValueColor))
-				--draw.FilledRect(X, Y, X + props.Value, Y + props.Size.Height)
-				
-				if props.Value >= props.Maximum then 
-					draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Maximum), Y + props.Size.Height)
-					return 
-				end
-				if props.Value <= props.Minimum then
-					draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Minimum), Y + props.Size.Height)
-					return
-				end
-				draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Value), Y + props.Size.Height)
+				if props.Rounded then
+					--placeholder
+					draw.Color(unpack(props.BackColor))
+					draw.RoundedRectFilled(X, Y, X + props.Size.Width, Y + props.Size.Height, 6)
+					
+					--value
+					draw.Color(unpack(props.ValueColor))
+					--draw.FilledRect(X, Y, X + props.Value, Y + props.Size.Height)
+					
+					if props.Value >= props.Maximum then 
+						draw.RoundedRectFilled(X, Y, X + ((props.Size.Width/props.Maximum)*props.Maximum), Y + props.Size.Height, 6)
+						return 
+					end
+					if props.Value <= props.Minimum then
+						draw.RoundedRectFilled(X, Y, X + ((props.Size.Width/props.Maximum)*props.Minimum), Y + props.Size.Height, 6)
+						return
+					end
+					draw.RoundedRectFilled(X, Y, X + ((props.Size.Width/props.Maximum)*props.Value), Y + props.Size.Height, 6)
 
-				draw.Color(unpack(props.BorderColor))
-				draw.OutlinedRect(X, Y, X + props.Size.Width, Y + props.Size.Height)
+					
+				else
+					--placeholder
+					draw.Color(unpack(props.BackColor))
+					draw.FilledRect(X, Y, X + props.Size.Width, Y + props.Size.Height)
+					
+					--value
+					draw.Color(unpack(props.ValueColor))
+					--draw.FilledRect(X, Y, X + props.Value, Y + props.Size.Height)
+					
+					if props.Value >= props.Maximum then 
+						draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Maximum), Y + props.Size.Height)
+						return 
+					end
+					if props.Value <= props.Minimum then
+						draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Minimum), Y + props.Size.Height)
+						return
+					end
+					draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Value), Y + props.Size.Height)
+
+					draw.Color(unpack(props.BorderColor))
+					draw.OutlinedRect(X, Y, X + props.Size.Width, Y + props.Size.Height)
+				end
 				
 				
 				
