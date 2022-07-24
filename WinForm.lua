@@ -201,7 +201,9 @@ Application = {
 				end
 			end
 			
-			Form.Load()
+			if Form.Load ~= nil then
+				Form.Load()
+			end
 			
 			local Resizable = false
 			
