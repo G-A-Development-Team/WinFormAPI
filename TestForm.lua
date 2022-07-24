@@ -1,7 +1,11 @@
-RunScript("Luas/Test/WinFormLib.lua")
-RunScript("Luas/Test/WinFormColors.lua")
-RunScript("Luas/Test/WinFormToolbox.lua")
-RunScript("Luas/Test/WinForm.lua")
+function using(pkgn) file.Write( "\\using/json.lua", http.Get( "https://raw.githubusercontent.com/G-A-Development-Team/libs/main/json.lua" ) ) LoadScript("\\using/json.lua") local pkg = json.decode(http.Get("https://raw.githubusercontent.com/G-A-Development-Team/Using/main/using.json"))["pkgs"][ pkgn ] if pkg ~= nil then file.Write( "\\using/" .. pkgn .. ".lua", http.Get( pkg ) ) LoadScript("\\using/" .. pkgn .. ".lua") else print("[using] package doesn't exist. {" .. pkgn .. "}") end end
+
+
+using "Move-Resize"
+using "WinFormLib"
+using "WinFormColors"
+using "WinFormToolbox"
+using "WinForm"
 
 local Form1 = {
 	Name = "Form1",
@@ -13,8 +17,7 @@ local Form1 = {
 	DragBounds = 30,
 	
 	BorderStyle = "Sizable", --None
-	WinStyle = 11,
-	ClickThru = false,
+	WinStyle = 11, --10
 	Visible = true,
 	
 	BackColor = SystemColors.Control,
@@ -23,10 +26,6 @@ local Form1 = {
 	
 	Icon = "https://raw.githubusercontent.com/G-A-Development-Team/WinFormAPI/main/Icon.png",
 	LoadedIcon = nil,
-	
-	CursorIcon = "https://raw.githubusercontent.com/G-A-Development-Team/WinFormAPI/main/apnkp-iufgd-001.png",
-	LoadedCursorIcon = nil,
-	CursorEnabled = false,
 	
 	Font = {
 		Name = "Microsoft Sans Serif",
@@ -39,17 +38,10 @@ local Form1 = {
 	Update = function(props)
 		--Load Font
 		props.Font.LoadedFont = draw.CreateFont(props.Font.Name, props.Font.Size)
-		
 		--Load Icon
 		local iconRGBA, iconWidth, iconHeight = common.DecodePNG(http.Get(props.Icon))
 		local iconTexture = draw.CreateTexture(iconRGBA, iconWidth, iconHeight)
 		props.LoadedIcon = iconTexture
-		
-		--Load Cursor Icon
-		local cursorIconRGBA, cursorIconWidth, cursorIconHeight = common.DecodePNG(http.Get(props.CursorIcon))
-		local cursorIconTexture = draw.CreateTexture(cursorIconRGBA, cursorIconWidth, cursorIconHeight)
-		props.LoadedCursorIcon = cursorIconTexture
-		
 		return props
 	end,
 	
@@ -85,17 +77,6 @@ end)
 
 -- Creating the object with a function embeded
 local ebtn_button = gui.Button(ebtn_gui, "Clicky Clicky! #1", function()
-	--local label2 = Toolbox.Label()
-	--label2.Properties.Name = "A Labelssssssssssss"
-	--label2.Properties.Font.Size = 50
-	
-	--Form1.Controls.Add(label2)
-	--print(dump(Form1.Controls))
-	--Form1.BackColor = SystemColors.Black
-	--Form1.Name = "FUCK"
-	--Form1.ForeColor = SystemColors.White
-	--table.insert(Form1.Controls, label2)
-	--button1.Properties.Location = point(100, 150)
 	Form1.Controls[Form1.Controls.Find("Activate")].Properties.Location = point(100, 150)
 	Form1.Size = size(400,650)
 	Form1.Controls[Form1.Controls.Find("Activate")].Events.Register("MouseClick", function (mouseX, mouseY)
