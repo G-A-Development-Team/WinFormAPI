@@ -13,4 +13,6 @@ SystemColors = {
 	Transparent = color(1, 1, 1, 1),
 	Grey = color(141, 141, 141, 255),
 	Red = color(240, 20, 0, 255),
+	Blue = color(0, 135, 255, 255),
+	Yellow = color(210, 150, 0, 255),
 }

@@ -251,9 +251,9 @@ Toolbox = {
 					return
 				end
 				draw.FilledRect(X, Y, X + ((props.Size.Width/props.Maximum)*props.Value), Y + props.Size.Height)
-				--Border
-				--draw.Color(unpack(props.BorderColor))
-				--draw.OutlinedRect(X, Y, X + props.Size.Width, Y + props.Size.Height)
+
+				draw.Color(unpack(props.BorderColor))
+				draw.OutlinedRect(X, Y, X + props.Size.Width, Y + props.Size.Height)
 				
 				
 				
